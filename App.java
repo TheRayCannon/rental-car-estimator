@@ -14,21 +14,21 @@ class App {
 
   private static double optionsCalculator(int rentalDays, boolean tollCharge, boolean gpsAddOn, boolean roadsideAddOn,
       boolean under25) {
-    if (tollCharge == true && gpsAddOn == true && roadsideAddOn == true && under25 == true) {
+    if (tollCharge && gpsAddOn && roadsideAddOn && under25) {
       return rentalDays * (surCharge + 3.95 + 2.95 + 3.95);
-    } else if (tollCharge == false && gpsAddOn == true && roadsideAddOn == true && under25 == true) {
+    } else if (!tollCharge && gpsAddOn && roadsideAddOn && under25) {
       return rentalDays * (surCharge + 2.95 + 3.95);
-    } else if (tollCharge == true && gpsAddOn == false && roadsideAddOn == true && under25 == true) {
+    } else if (tollCharge && !gpsAddOn && roadsideAddOn && under25) {
       return rentalDays * (surCharge + 3.95 + 3.95);
-    } else if (tollCharge == true && gpsAddOn == true && roadsideAddOn == false && under25 == true) {
+    } else if (tollCharge && gpsAddOn && !roadsideAddOn && under25) {
       return rentalDays * (surCharge + 2.95 + 3.95);
-    } else if (tollCharge == true && gpsAddOn == true && roadsideAddOn == true && under25 == false) {
+    } else if (tollCharge && gpsAddOn && roadsideAddOn && !under25) {
       return rentalDays * (baseCharge + 3.95 + 2.95 + 3.95);
-    } else if (tollCharge == true && gpsAddOn == true && roadsideAddOn == false && under25 == false) {
+    } else if (tollCharge && gpsAddOn && !roadsideAddOn && !under25) {
       return rentalDays * (baseCharge + 3.95 + 2.95);
-    } else if (tollCharge == true && gpsAddOn == false && roadsideAddOn == true && under25 == false) {
+    } else if (tollCharge && !gpsAddOn && roadsideAddOn && !under25) {
       return rentalDays * (baseCharge + 3.95 + 3.95);
-    } else if (tollCharge == false && gpsAddOn == true && roadsideAddOn == true && under25 == false) {
+    } else if (!tollCharge && gpsAddOn && roadsideAddOn && !under25) {
       return rentalDays * (baseCharge + 2.95 + 3.95);
     } else {
       return 0;
