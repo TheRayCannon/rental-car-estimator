@@ -2,9 +2,9 @@ class App {
   public static String date = "5/24/22";
   static int dayOfRental = 5;
   static double baseCharge = 29.99;
-  static double electricCharge = 3.95 + baseCharge;
-  static double GpsCharge = 2.95 + baseCharge;
-  static double roadsideCharge = baseCharge + 3.95;
+  static double electricCharge = 3.95;
+  static double GpsCharge = 2.95;
+  static double roadsideCharge = 3.95;
   static double surCharge = (baseCharge + (0.3 * baseCharge));
   static String surchargeoutput = String.format("%.2f", surCharge);
 
@@ -12,24 +12,29 @@ class App {
     return dayOfRental * baseCharge;
   }
 
+  static double RsGpsEt = electricCharge + GpsCharge + roadsideCharge;
+  static double GpsEt = GpsCharge + electricCharge;
+  static double RsEt = electricCharge + roadsideCharge;
+  static double RsGps = roadsideCharge + GpsCharge;
+
   private static double optionsCalculator(int rentalDays, boolean tollCharge, boolean gpsAddOn, boolean roadsideAddOn,
       boolean under25) {
     if (tollCharge && gpsAddOn && roadsideAddOn && under25) {
-      return rentalDays * (surCharge + 3.95 + 2.95 + 3.95);
+      return rentalDays * (surCharge + RsGpsEt);
     } else if (!tollCharge && gpsAddOn && roadsideAddOn && under25) {
-      return rentalDays * (surCharge + 2.95 + 3.95);
+      return rentalDays * (surCharge + RsGps);
     } else if (tollCharge && !gpsAddOn && roadsideAddOn && under25) {
-      return rentalDays * (surCharge + 3.95 + 3.95);
+      return rentalDays * (surCharge + RsEt);
     } else if (tollCharge && gpsAddOn && !roadsideAddOn && under25) {
-      return rentalDays * (surCharge + 2.95 + 3.95);
+      return rentalDays * (surCharge + GpsEt);
     } else if (tollCharge && gpsAddOn && roadsideAddOn && !under25) {
-      return rentalDays * (baseCharge + 3.95 + 2.95 + 3.95);
+      return rentalDays * (baseCharge + RsGpsEt);
     } else if (tollCharge && gpsAddOn && !roadsideAddOn && !under25) {
-      return rentalDays * (baseCharge + 3.95 + 2.95);
+      return rentalDays * (baseCharge + GpsEt);
     } else if (tollCharge && !gpsAddOn && roadsideAddOn && !under25) {
-      return rentalDays * (baseCharge + 3.95 + 3.95);
+      return rentalDays * (baseCharge + RsEt);
     } else if (!tollCharge && gpsAddOn && roadsideAddOn && !under25) {
-      return rentalDays * (baseCharge + 2.95 + 3.95);
+      return rentalDays * (baseCharge + RsGps);
     } else {
       return 0;
     }
